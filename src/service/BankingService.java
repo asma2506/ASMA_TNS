@@ -1,7 +1,4 @@
 package service;
-
-
-
 import model.*;
 import java.util.*;
 
@@ -16,7 +13,7 @@ public interface BankingService {
     Transaction findTransactionById(int id);
     Beneficiary findBeneficiaryById(int id);
 
-    List<Account> getAccountsByCustomerId(int customerId);
+    List<Account> getAccountsByCustomerId (int customerId);
     List<Transaction> getTransactionsByAccountId(int accountId);
     List<Beneficiary> getBeneficiariesByCustomerId(int customerId);
 

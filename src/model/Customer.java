@@ -2,8 +2,6 @@ package model;
 
 public class Customer extends Person {
 
-
-
 	    private int customerID;
 	    private String name;
 	    private String address;
