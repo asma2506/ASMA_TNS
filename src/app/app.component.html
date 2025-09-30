@@ -1,0 +1,215 @@
+<div class="container mt-5">
+  <div class="row">
+    <!-- placement Database Form -->
+    <div class="col-md-6 mx-auto">
+      <div class="shadow p-5 rounded">
+        <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+          <h4 class="display-6 text-center py-2">placement Database</h4>
+
+          <!--  Name -->
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input 
+              id="name" 
+              required 
+              #name="ngModel" 
+              ngModel 
+              name="name" 
+              type="text" 
+              class="form-control" 
+              placeholder="Enter the Name">
+            <div *ngIf="name.invalid && name.touched">
+              <small class="text-danger" *ngIf="name.errors?.['required']">Required</small>
+            </div>
+          </div>
+
+          <!-- date -->
+          <div class="mb-3">
+            <label for="date" class="form-label">Date</label>
+            <input 
+              id="date" 
+              required 
+              #date="ngModel" 
+              ngModel 
+              name="date" 
+              type="date" 
+              class="form-control" 
+              placeholder="Enter date">
+            <div *ngIf="date.invalid && date.touched">
+              <small class="date" *ngIf="date.errors?.['required']">Required</small>
+            </div>
+          </div>
+
+          <!-- Qualification -->
+          <div class="mb-4">
+            <label for="qualification" class="form-label">Qualification</label>
+            <input 
+              id="qualification" 
+              required 
+              #qualification="ngModel" 
+              ngModel 
+              name="qualification" 
+              type="text" 
+              class="form-control" 
+              placeholder="Enter Qualification">
+            <div *ngIf="qualification.invalid && qualification.touched">
+              <small class="text-danger" *ngIf="qualification.errors?.['required']">Required</small>
+            </div>
+          </div>
+
+          <!-- Year -->
+          <div class="mb-4">
+            <label for="year" class="form-label">Year</label>
+            <input 
+              id="year" 
+              required 
+              #year="ngModel" 
+              ngModel 
+              name="year" 
+              type="number" 
+              class="form-control" 
+              placeholder="Enter Year">
+            <div *ngIf="year.invalid && year.touched">
+              <small class="text-danger" *ngIf="year.errors?.['required']">Required</small>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="form-group text-center">
+            <input class="btn btn-primary" type="submit" value="Submit">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table Section -->
+  <div class="row mt-5">
+    <div class="col">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Qualification</th>
+            <th>Year</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let placement of PlacementDetails">
+            <td>{{placement.id}}</td>
+            <td>{{placement.name}}</td>
+            <td>{{placement.date}}</td>
+            <td>{{placement.qualification}}</td>
+            <td>{{placement.year}}</td>
+            <td>
+              <button 
+                type="button" 
+                class="btn btn-primary" 
+                data-bs-toggle="modal" 
+                data-bs-target="#exampleModal" 
+                (click)="edit(placement)">Edit</button>
+            </td>
+            <td>
+              <button 
+                type="button" 
+                class="btn btn-danger" 
+                (click)="deletePlacement(placement)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Update placement Modal -->
+   
+  <div class="row justify-content-center mb-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Update placement</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form #updateForm="ngForm" (ngSubmit)="updatePlacement()">
+            <!-- Name -->
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input 
+                id="name" 
+                required 
+                #name="ngModel" 
+                [(ngModel)]="placementToUpdate.name" 
+                name="name" 
+                type="text" 
+                class="form-control" 
+                placeholder="Enter the name">
+              <div *ngIf="name.invalid && name.touched">
+                <small class="text-danger" *ngIf="name.errors?.['required']">Required</small>
+              </div>
+            </div>
+
+            <!-- date -->
+            <div class="mb-3">
+              <label for="date" class="form-label">Date</label>
+              <input 
+                id="date" 
+                required 
+                #date="ngModel" 
+                [(ngModel)]="placementToUpdate.date" 
+                name="date" 
+                type="date" 
+                class="form-control" 
+                placeholder="Enter date">
+              <div *ngIf="date.invalid && date.touched">
+                <small class="text-danger" *ngIf="date.errors?.['required']">Required</small>
+              </div>
+            </div>
+
+            <!-- Qualification -->
+            <div class="mb-4">
+              <label for="qualification" class="form-label">Qualification</label>
+              <input 
+                id="qualification" 
+                required 
+                #qualification="ngModel" 
+                [(ngModel)]="placementToUpdate.qualification" 
+                name="qualification" 
+                type="text" 
+                class="form-control" 
+                placeholder="Enter the Qualification">
+              <div *ngIf="qualification.invalid && qualification.touched">
+                <small class="text-danger" *ngIf="qualification.errors?.['required']">Required</small>
+              </div>
+            </div>
+            <!--Year-->
+            <div class="mb-4">
+              <label for="year" class="form-label">Year</label>
+              <input 
+                id="year" 
+                required 
+                #year="ngModel" 
+                [(ngModel)]="placementToUpdate.year" 
+                name="year" 
+                type="number" 
+                class="form-control" 
+                placeholder="Enter  Year">
+              <div *ngIf="year.invalid && year.touched">
+                <small class="text-danger" *ngIf="year.errors?.['required']">Required</small>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group text-center">
+              <input class="btn btn-primary" type="submit" value="Update">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
